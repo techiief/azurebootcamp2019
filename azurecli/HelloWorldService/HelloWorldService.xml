@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HelloWorldService</name>
+    </assembly>
+    <members>
+        <member name="T:HelloWorldService.Controllers.HelloWorldController">
+            <summary>
+            Hello World
+            </summary>
+        </member>
+        <member name="M:HelloWorldService.Controllers.HelloWorldController.Get">
+            <summary>
+            Get Values
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

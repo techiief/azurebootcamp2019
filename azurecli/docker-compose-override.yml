@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  hellorworldweb:
+    image: helloworldweb:v1
+    ports:
+      - "7001:80"
+
+  helloworldservice:
+    image: helloworldservice:v1
+    ports:
+      - "5001:80"
+
+

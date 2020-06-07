@@ -1,0 +1,35 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+variables:
+  dockerComposeFile: 'azurepipeline/docker-compose.yml'
+  additionalDockerComposeFiles: 'azurepipeline/docker-compose-override.yml'
+  azureSubscriptionEndpoint: azure_service_connection
+  azureContainerRegistry: acrgab2019demo2
+  helloWorldWebImageName: acrgab2019demo2.azurecr.io/helloworldweb:v1
+  helloWorldServiceImageName: acrgab2019demo2.azurecr.io/helloworldservice:v1
+  dockerLoginId: acrgab2019demo2
+  dockerPassword: yxHOAeC2LjQ3qKtCk5Y+olQTNZgtWQ5O
+  registryServer: acrgab2019demo2.azurecr.io
+
+
+steps:
+- task: DockerInstaller@0
+  displayName:  'Docker Installer'
+  inputs:
+    dockerVersion: 17.09.0-ce
+    releaseType: stable
+
+- script: |
+    docker-compose -f $(dockerComposeFile) -f $(additionalDockerComposeFiles) up -d
+  displayName: 'Build docker image'
+
+- script: |
+    docker login -u $(dockerLoginId) -p "yxHOAeC2LjQ3qKtCk5Y+olQTNZgtWQ5O" $(registryServer)
+    docker push $(helloWorldWebImageName)
+    docker push $(helloWorldServiceImageName)
+  displayName: 'Push docker image to ACR'
+

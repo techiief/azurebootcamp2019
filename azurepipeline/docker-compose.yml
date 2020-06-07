@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  hellorworldweb:
+    build:
+      context: ..
+      dockerfile: azurepipeline/HelloWorldWeb/Dockerfile
+
+    
+  helloworldservice:
+    build:
+      context: ..
+      dockerfile: azurepipeline/HelloWorldService/Dockerfile
+    
+
+
+
